@@ -3,6 +3,8 @@ package org.romanchi.instagram.services;
 import org.romanchi.instagram.model.entities.Girl;
 import org.romanchi.instagram.repositories.GirlsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,8 @@ public class GirlsService {
         girlsRepository.save(girl);
     }
 
-    public List<Girl> getAllLikedGirls(){
-        return girlsRepository.findAll();
+    public List<Girl> getAllLikedGirls(PageRequest pageRequest){
+        return girlsRepository.findAll(pageRequest).getContent();
+
     }
 }

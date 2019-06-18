@@ -14,6 +14,15 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="/liked?page=${page - 1}">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="/liked?page=${page + 1}">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/liked?page=${page + 2}">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/liked?page=${page + 3}">3</a></li>
+                    <li class="page-item"><a class="page-link" href="/liked?page=${page + 1}">Next</a></li>
+                </ul>
+            </nav>
             <div class="content">
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
