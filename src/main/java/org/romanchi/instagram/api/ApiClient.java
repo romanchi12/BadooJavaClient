@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.romanchi.instagram.model.Credentials;
-import org.romanchi.instagram.model.Girl;
+import org.romanchi.instagram.model.dto.GirlDTO;
 import org.romanchi.instagram.model.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +48,7 @@ public class ApiClient {
         }
     }
 
-    private Girl parseGirlInfoAndGet(){
+    private GirlDTO parseGirlInfoAndGet(){
         if(!driver.getCurrentUrl().equals("https://badoo.com/encounters")){
             return null;
         }
@@ -64,10 +64,10 @@ public class ApiClient {
         WebElement ageLabel = wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector(".profile-header__age")));
         Integer age = Integer.valueOf(ageLabel.getText().substring(2));
-        return Girl.builder().credentials(credentials).age(age).photourl(imageUrl).build();
+        return GirlDTO.builder().credentials(credentials).age(age).photoUrl(imageUrl).build();
     }
 
-    public Optional<Girl> nextGirl(){
+    public Optional<GirlDTO> nextGirl(){
         if(!driver.getCurrentUrl().equals("https://badoo.com/encounters")){
             driver.get("https://badoo.com/encounters");
         }
@@ -76,11 +76,23 @@ public class ApiClient {
                 ExpectedConditions.presenceOfElementLocated(
                         By.cssSelector(".encounters-actions__item--no")));
         noBtn.click();
-        Girl girl = parseGirlInfoAndGet();
-        return Optional.ofNullable(girl);
+        GirlDTO girlDTO = parseGirlInfoAndGet();
+        return Optional.ofNullable(girlDTO);
     }
 
-    public Optional<Girl> currentGirl() {
+    public Optional<GirlDTO> currentGirl() {
         return Optional.ofNullable(parseGirlInfoAndGet());
+    }
+
+    public Optional<GirlDTO> likeGirl() {
+        if(!driver.getCurrentUrl().equals("https://badoo.com/encounters")){
+            driver.get("https://badoo.com/encounters");
+        }
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement likeBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector(".encounters-actions__item--yes")));
+        likeBtn.click();
+        GirlDTO girlDTO = parseGirlInfoAndGet();
+        return Optional.ofNullable(girlDTO);
     }
 }

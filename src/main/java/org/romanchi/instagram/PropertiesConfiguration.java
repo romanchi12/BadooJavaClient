@@ -1,4 +1,4 @@
-package org.romanchi;
+package org.romanchi.instagram;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

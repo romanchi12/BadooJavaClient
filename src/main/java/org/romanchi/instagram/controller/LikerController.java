@@ -1,11 +1,10 @@
 package org.romanchi.instagram.controller;
 
-import org.romanchi.instagram.model.Girl;
+import org.romanchi.instagram.model.dto.GirlDTO;
 import org.romanchi.instagram.services.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/liker")
@@ -21,13 +20,19 @@ public class LikerController {
 
     @GetMapping(value = "/next", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Girl next(){
+    public GirlDTO next(){
         return apiService.next();
+    }
+
+    @GetMapping(value = "/like", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public GirlDTO like(){
+        return apiService.like();
     }
 
     @GetMapping(value = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Girl current(){
+    public GirlDTO current(){
         return apiService.current();
     }
 

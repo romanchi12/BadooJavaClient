@@ -2,25 +2,30 @@ package org.romanchi.instagram.services;
 
 import org.romanchi.instagram.api.ApiClient;
 import org.romanchi.instagram.exceptions.ApiException;
-import org.romanchi.instagram.model.Girl;
+import org.romanchi.instagram.model.dto.GirlDTO;
+import org.romanchi.instagram.repositories.GirlsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApiService {
-    final
-    private ApiClient apiClient;
+
+    private final ApiClient apiClient;
 
     @Autowired
     public ApiService(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
-    public Girl next(){
+    public GirlDTO next(){
         return apiClient.nextGirl().orElseThrow(()->new ApiException("ApiException"));
     }
 
-    public Girl current() {
+    public GirlDTO current() {
         return apiClient.currentGirl().orElseThrow(()->new ApiException("ApiException"));
+    }
+
+    public GirlDTO like() {
+        return apiClient.likeGirl().orElseThrow(()->new ApiException("ApiException"));
     }
 }

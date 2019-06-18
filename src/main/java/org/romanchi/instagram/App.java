@@ -1,4 +1,4 @@
-package org.romanchi;
+package org.romanchi.instagram;
 
 import org.romanchi.instagram.api.ApiClient;
 import org.springframework.boot.WebApplicationType;

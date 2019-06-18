@@ -1,4 +1,4 @@
-package org.romanchi.instagram.model;
+package org.romanchi.instagram.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class Girl {
+public class GirlDTO {
     private String url;
     private String credentials;
     private Integer age;
-    private String photourl;
+    private String photoUrl;
 }
